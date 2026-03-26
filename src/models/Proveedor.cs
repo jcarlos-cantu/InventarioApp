@@ -4,5 +4,5 @@ public record Proveedor(
     int Id,
     string Nombre,
     string Email,
-    string Telefono,
+    string Telefono
 );

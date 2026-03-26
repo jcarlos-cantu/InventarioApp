@@ -1,4 +1,49 @@
-﻿// ============================================================
+﻿using InventarioApp.Factories;
+using InventarioApp.Models;
+using InventarioApp.Repositories;
+
+Console.WriteLine("====================== InventarioApp====================");
+
+var repository = new InMemoryProductoRepository();
+
+Producto laptop = ProductoFactory.Crear(nombre: "Laptop Dell XPS 13", precio: 1200, cantidad: 5, CategoriaProducto.Electronica);
+Producto mouse = ProductoFactory.Crear(nombre: "Mouse Logitech MX Master", precio: 99, cantidad: 20, CategoriaProducto.Electronica);
+Producto teclado = ProductoFactory.Crear(nombre: "Teclado Mecánico", precio: 150, cantidad: 3, CategoriaProducto.Electronica);
+Producto silla = ProductoFactory.Crear(nombre: "Silla Ergonómica Herman Miller", precio: 500, cantidad: 8, CategoriaProducto.Muebles);
+Producto escritorio = ProductoFactory.Crear(nombre: "Escritorio Stand-up", precio: 300, cantidad: 2, CategoriaProducto.Muebles);
+
+repository.Agregar(laptop);
+repository.Agregar(mouse);
+repository.Agregar(teclado);
+repository.Agregar(silla);
+repository.Agregar(escritorio);
+
+Console.WriteLine($"Productos agregados: {repository.CantidadProductos}");
+
+IEnumerable<Producto> electronicos = repository.BuscarPorCategoria(CategoriaProducto.Electronica);
+Console.WriteLine($"Productos electronicos: {electronicos.Count()}");
+
+foreach (Producto producto in electronicos)
+{
+    Console.WriteLine($" {producto.Nombre} : {producto.Precio:C2}");
+}
+
+IEnumerable<Producto> conMouse = repository.BuscarPorNombre("mouse");
+Console.WriteLine($"\nProductos con mouse: {conMouse.Count()}");
+
+foreach (Producto producto in conMouse)
+{
+    Console.WriteLine($" {producto.Nombre} : {producto.Precio:C2}");
+}
+
+IEnumerable<string> nombres = repository.ObtenerNombres();
+Console.WriteLine($"\nTodos los nombres de los productos: {string.Join(", ", nombres)}");
+
+bool hayStockBajo = repository.HayStockBajo();
+Console.WriteLine($"\nHay stock bajo: {hayStockBajo}");
+
+/*
+// ============================================================
 // SISTEMA DE INVENTARIO - Clase 1.1
 // Estado: Mensaje de bienvenida
 // ============================================================
@@ -106,7 +151,6 @@ int? longitud = entrada?.Length;
 string comandoLimpio = string.IsNullOrWhiteSpace(entrada) ? "salir" : entrada.Trim().ToLower();
 Console.WriteLine($"Longitud: {longitud ?? 0}");
 Console.WriteLine($"Comando: {comandoLimpio}");
-*/
 
 
 Console.WriteLine("Estado del sistema");
@@ -186,7 +230,7 @@ Console.WriteLine("Metadatos configurados");
 Console.WriteLine();
 Console.WriteLine("Proximo paso: Agregar argumentos CL y configuracion de repositorio en github");
 Console.WriteLine("==========================================");
-*/
+
 // Funciones
 
 void MostarBanner()
@@ -222,3 +266,4 @@ void MostarMenu()
     Console.WriteLine("3. buscar - Buscar producto");
     Console.WriteLine("4. salir - Salir");
 }
+*/

@@ -8,5 +8,6 @@ public enum CategoriaProducto
     Hogar, 
     Deportes,
     Libros,
+    Muebles,
     Otros
 }
