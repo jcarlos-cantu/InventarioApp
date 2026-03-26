@@ -7,8 +7,65 @@ using System.Reflection;
 
 var assembly = Assembly.GetExecutingAssembly();
 var version = assembly.GetName().Version;
+int cantidadProductos = 0;
+decimal valorTotalDelInventario = 0.00m;
+bool sistemaActivo = true;
+string nombreSistema = "Sistema de Gestion de Inventario";
 
 MostarBanner();
+
+bool continuar = true;
+while (continuar)
+{
+    MostrarMenu();
+    string comando = LeerEntradaInventario("inventario: ");
+    Console.WriteLine($"Comando ingresado: " {comando});
+    //continuar = ProcesarComando(comando);
+    comando = false;
+}
+
+bool ProcesarComando(string comando)
+{
+    switch (comando.ToLower())
+    {
+        case "listar":
+            ListarProductos();
+            return true;
+        case "agregar":
+            AgregarProducto();
+            return true;
+        case "buscar":
+            BuscarProducto();
+            return true;
+        case "salir":
+            return false;
+        default:
+            Console.WriteLine($"Error: comando desconocido '{comando}'");
+            return true;
+    }
+}
+
+void ListarProductos()
+{
+    Console.WriteLine($"Total: {cantidadProductos} productos en el inventario");
+    Console.WriteLine($"Valor total: ${valorTotalDelInventario:N2}");
+}
+
+void AgregarProducto()
+{
+    Console.WriteLine("Agregar producto (Modulo 3)...");
+}
+
+void BuscarProducto()
+{
+    Console.WriteLine("Buscar producto (Modulo 4)...");
+}
+
+string LeerEntradaInventario(string prompt)
+{
+    string salida = "El prompt ingresado es: " + prompt;
+    return salida;
+}
 
 if (args.Length > 0)
 {
@@ -32,10 +89,7 @@ if (args.Length > 0)
     }
 }
 
-int cantidadProductos = 0;
-decimal valorTotalDelInventario = 0.00m;
-bool sistemaActivo = true;
-string nombreSistema = "Sistema de Gestion de Inventario";
+
 
 /*
 string? nombre = null;
@@ -158,4 +212,13 @@ void MostrarAyuda()
     Console.WriteLine("EJEMPLOS:");
     Console.WriteLine(" dotnet run -- --help");
     Console.WriteLine(" dotnet run -- --version");
+}
+
+void MostarMenu()
+{
+    Console.WriteLine("\nMenu Principal");
+    Console.WriteLine("1. listar - Listar productos");
+    Console.WriteLine("2. agregar - Agregar producto");
+    Console.WriteLine("3. buscar - Buscar producto");
+    Console.WriteLine("4. salir - Salir");
 }
